@@ -1,4 +1,4 @@
 
-import { Screen } from "./screen.js";
+import { GameSreen } from "./screen.js";
 
-const screen = new Screen(800, 600);
+const gameScreen = new GameSreen(500, 500);
