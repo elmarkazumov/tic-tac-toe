@@ -23,6 +23,23 @@ class Render {
         this.context.stroke();
     }
 
+    drawCross(x, y, size, widthLine, colorLine) {
+        this.context.strokeStyle = colorLine;
+        this.context.lineWidth = widthLine;
+
+        this.context.beginPath();
+
+        this.context.moveTo(x - size, y - size);
+        this.context.lineTo(x + size, y + size);
+    
+        this.context.moveTo(x + size, y - size);
+        this.context.lineTo(x - size, y + size);
+
+        this.context.closePath();
+
+        this.context.stroke();
+    }
+
     drawCircle(x, y, radius, color) {
         this.context.strokeStyle = color;
 

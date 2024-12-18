@@ -1,4 +1,5 @@
 import { Render } from "./render.js";
+import { Field } from "./logic.js";
 
 class GameSreen {
     constructor(canvasWidth, canvasHeight) {
@@ -13,6 +14,8 @@ class GameSreen {
 
         const render = new Render(context);
 
+        const fieldX = new Field(canvas, context);
+
         render.drawRect(0, 0, canvas.width, canvas.height, '#424345');
 
         // first gorizontal line
@@ -26,6 +29,8 @@ class GameSreen {
 
         // second vertical line
         render.drawLine(canvas.width / 1.5, 0, canvas.width / 1.5, canvas.height, 2, '#ffffff');
+
+        fieldX.cellClicked();
     }
 }
 
