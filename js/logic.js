@@ -36,25 +36,29 @@ class Field {
 
     }
 
-    circleCell(cell) {
-        this.render.drawCircle((cell.place.leftX + cell.place.rightX) / 2, (cell.place.leftY + cell.place.rightY) / 2, 40, '#ffffff');
-    }
-
-    crossCell(cell) {
-        this.render.drawCross((cell.place.leftX + cell.place.rightX) / 2, (cell.place.leftY + cell.place.rightY) / 2, 40, 2, '#ffffff');
-    }
-
     playerStep(cell) {
-        if(this.step % 2 == 0) {
-            this.crossCell(cell);
+        if(!cell.state){
+            if(this.step % 2 == 0) {
+                this.render.drawCross((cell.place.leftX + cell.place.rightX) / 2, (cell.place.leftY + cell.place.rightY) / 2, 40, '#ffffff');
+                cell.state = true;
+                cell.figure = 'x';
+            } else {
+                this.render.drawCircle((cell.place.leftX + cell.place.rightX) / 2, (cell.place.leftY + cell.place.rightY) / 2, 40, '#ffffff');
+                cell.state = true;
+                cell.figure = 'o';
+            }
+    
+            this.step += 1;
         } else {
-            this.circleCell(cell);
+            return;
         }
-
-        this.step += 1;
     }
 
-
+    checkField() {
+        this.cells.forEach(cell => {
+            
+        })
+    }
 
     cellClicked() {
         this.canvas.addEventListener('click', (event) => {
