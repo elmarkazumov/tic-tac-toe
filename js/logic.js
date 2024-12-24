@@ -27,9 +27,9 @@ class Field {
         ];
 
         this.winningСombinations = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8],
-            [0, 3, 6], [1, 4, 7], [2, 5, 8],
-            [0, 4, 8], [2, 4, 6], 
+            [this.cells[0], this.cells[1], this.cells[2]], [this.cells[3], this.cells[4], this.cells[5]], [this.cells[6], this.cells[7], this.cells[8]],
+            [this.cells[0], this.cells[3], this.cells[6]], [this.cells[1], this.cells[4], this.cells[7]], [this.cells[2], this.cells[5], this.cells[8]],
+            [this.cells[0], this.cells[4], this.cells[8]], [this.cells[2], this.cells[4], this.cells[6]],
         ];
 
         this.step = 0;
@@ -49,15 +49,19 @@ class Field {
             }
     
             this.step += 1;
+            
+            this.statusGame = '';
         } else {
             return;
         }
     }
 
-    checkField() {
-        this.cells.forEach(cell => {
-            
-        })
+    checkCombinations() {
+        for(const combination of this.winningСombinations) {
+            if(combination[0].figure == combination[1].figure && combination[0].figure == combination[2].figure && combination[0].figure != '') {
+                alert(`Победил: ${combination[0].figure}`);
+            }
+        }
     }
 
     cellClicked() {
@@ -65,6 +69,7 @@ class Field {
             this.cells.forEach(cell => {
                 if((event.clientX >= cell.place.leftX && event.clientX <= cell.place.rightX) && (event.clientY >= cell.place.leftY && event.clientY <= cell.place.rightY)) {
                     this.playerStep(cell);
+                    this.checkCombinations();
                 } else {
                     return;
                 }
