@@ -34,6 +34,8 @@ class Field {
 
         this.step = 0;
 
+        this.statusGame = 'none';
+
     }
 
     playerStep(cell) {
@@ -50,7 +52,6 @@ class Field {
     
             this.step += 1;
             
-            this.statusGame = '';
         } else {
             return;
         }
@@ -60,7 +61,17 @@ class Field {
         for(const combination of this.winningСombinations) {
             if(combination[0].figure == combination[1].figure && combination[0].figure == combination[2].figure && combination[0].figure != '') {
                 alert(`Победил: ${combination[0].figure}`);
+                this.statusGame = 'win';
             }
+        }
+
+        function cellState(element) {
+            return element.state;
+        }
+        
+        if(this.winningСombinations.flat().every(cellState)){
+            alert('Ничья');
+            this.statusGame = 'dead heat';
         }
     }
 
@@ -68,11 +79,13 @@ class Field {
         this.canvas.addEventListener('click', (event) => {
             this.cells.forEach(cell => {
                 if((event.clientX >= cell.place.leftX && event.clientX <= cell.place.rightX) && (event.clientY >= cell.place.leftY && event.clientY <= cell.place.rightY)) {
-                    this.playerStep(cell);
-                    this.checkCombinations();
-                } else {
-                    return;
-                }
+                    if(this.statusGame == 'none') {
+                        this.playerStep(cell);
+                        this.checkCombinations();
+                    } else {
+                        return;
+                    }
+                } 
             })
         })
     }
