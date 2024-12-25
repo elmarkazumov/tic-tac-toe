@@ -69,16 +69,20 @@ class Field {
             return element.state;
         }
         
-        if(this.winningСombinations.flat().every(cellState)){
+        if(this.winningСombinations.flat().every(cellState) && this.statusGame != 'win'){
             alert('Ничья');
             this.statusGame = 'dead heat';
         }
     }
 
     cellClicked() {
+        const canvasPlace = this.canvas.getBoundingClientRect();
+
         this.canvas.addEventListener('click', (event) => {
             this.cells.forEach(cell => {
-                if((event.clientX >= cell.place.leftX && event.clientX <= cell.place.rightX) && (event.clientY >= cell.place.leftY && event.clientY <= cell.place.rightY)) {
+                
+                if(((event.clientX - canvasPlace.left) >= cell.place.leftX && (event.clientX - canvasPlace.left) <= cell.place.rightX) 
+                    && ((event.clientY - canvasPlace.top) >= cell.place.leftY && (event.clientY - canvasPlace.top) <= cell.place.rightY)) {
                     if(this.statusGame == 'none') {
                         this.playerStep(cell);
                         this.checkCombinations();
