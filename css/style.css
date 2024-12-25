@@ -6,3 +6,10 @@
 body {
     background-color: rgb(109, 109, 109);
 }
+
+.game__field {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
